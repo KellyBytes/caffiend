@@ -1,5 +1,12 @@
+import { useState } from 'react';
+import Authentication from './Authentication';
+import Modal from './Modal';
+import { useAuth } from '../context/AuthContext';
+
 const Layout = (props) => {
   const { children } = props;
+  const [showModal, setShowModal] = useState(false);
+  const { globalUser, logout } = useAuth();
 
   const header = (
     <header>
@@ -7,10 +14,16 @@ const Layout = (props) => {
         <h1 className="text-gradient">CAFFIEND</h1>
         <p>For Coffee Insatiates</p>
       </div>
-      <button>
-        <p>Sign up for free</p>
-        <i className="fa-solid fa-mug-hot" />
-      </button>
+      {globalUser ? (
+        <button onClick={logout}>
+          <p>Logout</p>
+        </button>
+      ) : (
+        <button onClick={() => setShowModal(true)}>
+          <p>Sign up for free</p>
+          <i className="fa-solid fa-mug-hot" />
+        </button>
+      )}
     </header>
   );
 
@@ -27,12 +40,30 @@ const Layout = (props) => {
           FantaCSS
         </a>{' '}
         design library.
+        <br />
+        Check out the project on{' '}
+        <a
+          target="_blank"
+          href="https://github.com/jamezmca/reactjs-full-course"
+        >
+          GitHub
+        </a>
+        !
       </p>
     </footer>
   );
 
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
+      {showModal && (
+        <Modal handleCloseModal={handleCloseModal}>
+          <Authentication handleCloseModal={handleCloseModal} />
+        </Modal>
+      )}
       {header}
       <main>{children}</main>
       {footer}
