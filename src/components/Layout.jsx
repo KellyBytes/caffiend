@@ -30,7 +30,7 @@ const Layout = (props) => {
   const footer = (
     <footer>
       <p>
-        <span className="text-gradient">Caffiend</span> waas made by{' '}
+        <span className="text-gradient">Caffiend</span> was made by{' '}
         <a href="https://www.smoljames.com" target="_blank">
           Smoljames
         </a>
