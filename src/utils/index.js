@@ -79,6 +79,7 @@ export const coffeeOptions = [
   { name: 'Macchiato', caffeine: 85 },
   { name: 'Flat White', caffeine: 130 },
   { name: 'Black Coffee (8oz)', caffeine: 95 },
+  { name: 'Drip Coffee (8oz)', caffeine: 80 },
   { name: 'Drip Coffee (12oz)', caffeine: 120 },
   { name: 'Iced Coffee (8oz)', caffeine: 90 },
   { name: 'Cold Brew (12oz)', caffeine: 155 },
@@ -176,6 +177,10 @@ export function getTopThreeCoffees(historyData) {
 }
 
 export function sortCoffeeOptions(historyData) {
+  if (!historyData) {
+    return [...coffeeOptions];
+  }
+
   const coffeeCount = {};
 
   // Count occurrences of each coffee type
@@ -224,9 +229,9 @@ export function timeSinceConsumption(utcMilliseconds) {
   let result = '';
   if (months > 0) result += `${months}M `;
   if (remainingDays > 0) result += `${remainingDays}D `;
-  if (remainingHours > 0) result += `${remainingHours}H `;
-  if (remainingMinutes > 0) result += `${remainingMinutes}M `;
-  if (remainingSeconds > 0 || result === '') result += `${remainingSeconds}S`; // Show seconds even if they're 0 if nothing else exists
+  if (remainingHours > 0) result += `${remainingHours}h `;
+  if (remainingMinutes > 0 || result === '') result += `${remainingMinutes}m `;
+  // if (remainingSeconds > 0 || result === '') result += `${remainingSeconds}S`; // Show seconds even if they're 0 if nothing else exists
 
   return result.trim(); // Remove any trailing space
 }

@@ -225,8 +225,51 @@ h2 {
   flex-wrap: wrap;
 }
 
-.coffee-history i {
+.history-data {
+  padding: 0 2rem;
+}
+
+.coffee-history-item i {
   font-size: 1.5rem;
+}
+
+.coffee-history-item {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip-text {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 200px;
+  min-width: 90px;
+  margin-bottom: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--border-secondary);
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  white-space: pre-line;
+  /* word-break: break-word; */
+  border-radius: 0.25rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+/* hover */
+.coffee-history-item:hover .tooltip-text {
+  opacity: 1;
+}
+
+/* click */
+.tooltip-text.visible {
+  opacity: 1;
 }
 
 .coffee-card {
