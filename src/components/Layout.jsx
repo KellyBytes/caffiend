@@ -30,25 +30,22 @@ const Layout = (props) => {
   const footer = (
     <footer>
       <p>
-        <span className="text-gradient">Caffiend</span> was made by{' '}
-        <a href="https://www.smoljames.com" target="_blank">
-          Smoljames
-        </a>
+        <span className="text-gradient">Caffiend</span>
         <br />
-        using the{' '}
-        <a href="https://www.fantacss.smoljames.com" target="_blank">
-          FantaCSS
-        </a>{' '}
-        design library.
-        <br />
-        Check out the project on{' '}
-        <a
-          target="_blank"
-          href="https://github.com/jamezmca/reactjs-full-course"
-        >
-          GitHub
-        </a>
-        !
+        <div className="credit">
+          Originally created by{' '}
+          <a href="https://www.smoljames.com" target="_blank">
+            Smoljames
+          </a>
+          .
+          <br />
+          Modified by <a href="https://github.com/KellyBytes">KellyBytes</a>.
+          Check out the project on{' '}
+          <a target="_blank" href="https://github.com/KellyBytes/caffiend">
+            GitHub
+          </a>
+          !
+        </div>
       </p>
     </footer>
   );

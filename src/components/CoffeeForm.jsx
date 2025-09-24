@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { coffeeOptions } from '../utils';
+import { coffeeOptions, sortCoffeeOptions } from '../utils';
 import Modal from './Modal';
 import Authentication from './Authentication';
 import { useAuth } from '../context/AuthContext';
@@ -17,6 +17,8 @@ const CoffeeForm = (props) => {
   const [min, setMin] = useState(0);
 
   const { globalData, setGlobalData, globalUser } = useAuth();
+
+  const favCoffees = sortCoffeeOptions(globalData);
 
   const handleSubmitForm = async () => {
     if (!isAuthenticated) {
@@ -82,7 +84,7 @@ const CoffeeForm = (props) => {
       </div>
       <h4>Select coffee type</h4>
       <div className="coffee-grid">
-        {coffeeOptions.slice(0, 5).map((option, optionIndex) => {
+        {favCoffees.slice(0, 5).map((option, optionIndex) => {
           return (
             <button
               onClick={() => {
@@ -121,7 +123,7 @@ const CoffeeForm = (props) => {
           id="coffee-list"
         >
           <option value={null}>Select type</option>
-          {coffeeOptions.map((option, optionIndex) => {
+          {favCoffees.map((option, optionIndex) => {
             return (
               <option value={option.name} key={optionIndex}>
                 {option.name} ({option.caffeine} mg)
@@ -133,7 +135,7 @@ const CoffeeForm = (props) => {
       <h4>Add the cost ($)</h4>
       <input
         type="number"
-        className="w-full"
+        className="w-full coffee-cost"
         value={coffeeCost}
         onChange={(e) => setCoffeeCost(e.target.value)}
         placeholder="e.g. 4.50"

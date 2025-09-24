@@ -146,7 +146,8 @@ h3,
 h4,
 h5,
 h6,
-button {
+button,
+summary {
   font-family: "Grenze", serif;
   width: fit-content;
 }
@@ -652,7 +653,8 @@ details[open] summary {
     line-height: 1.5rem;
   }
 
-  h1 {
+  h1,
+  summary {
     font-size: 2.25rem;
     line-height: 2.5rem;
   }

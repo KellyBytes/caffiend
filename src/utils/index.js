@@ -72,26 +72,26 @@ export const coffeeConsumptionHistory = {
 
 export const coffeeOptions = [
   { name: 'Espresso', caffeine: 63 },
-  { name: 'Double Espresso', caffeine: 126 },
   { name: 'Americano', caffeine: 96 },
   { name: 'Cappuccino', caffeine: 80 },
   { name: 'Latte', caffeine: 80 },
   { name: 'Mocha', caffeine: 90 },
   { name: 'Macchiato', caffeine: 85 },
   { name: 'Flat White', caffeine: 130 },
-  { name: 'Cortado', caffeine: 85 },
-  { name: 'Red Eye', caffeine: 159 },
   { name: 'Black Coffee (8oz)', caffeine: 95 },
+  { name: 'Drip Coffee (12oz)', caffeine: 120 },
   { name: 'Iced Coffee (8oz)', caffeine: 90 },
   { name: 'Cold Brew (12oz)', caffeine: 155 },
-  { name: 'Nitro Cold Brew (12oz)', caffeine: 215 },
-  { name: 'Drip Coffee (12oz)', caffeine: 120 },
   { name: 'Frappuccino', caffeine: 95 },
+  { name: 'Instant Coffee (1 tsp)', caffeine: 30 },
+  { name: 'Cortado', caffeine: 85 },
+  { name: 'Red Eye', caffeine: 159 },
+  { name: 'Double Espresso', caffeine: 126 },
+  { name: 'Nitro Cold Brew (12oz)', caffeine: 215 },
   { name: 'Turkish Coffee', caffeine: 160 },
   { name: 'Irish Coffee', caffeine: 70 },
   { name: 'Vietnamese Coffee', caffeine: 100 },
   { name: 'Affogato', caffeine: 65 },
-  { name: 'Instant Coffee (1 tsp)', caffeine: 30 },
   { name: 'Decaf Coffee', caffeine: 2 },
   { name: 'Chai Latte', caffeine: 40 },
   { name: 'Matcha Latte', caffeine: 70 },
@@ -173,6 +173,34 @@ export function getTopThreeCoffees(historyData) {
   });
 
   return topThree;
+}
+
+export function sortCoffeeOptions(historyData) {
+  const coffeeCount = {};
+
+  // Count occurrences of each coffee type
+  for (const entry of Object.values(historyData)) {
+    const coffeeName = entry.name;
+    coffeeCount[coffeeName] = (coffeeCount[coffeeName] || 0) + 1;
+  }
+
+  // Sort by count. Keep the original order when the counts are the same
+  const sorted = [...coffeeOptions].sort((a, b) => {
+    const countA = coffeeCount[a.name] || 0;
+    const countB = coffeeCount[b.name] || 0;
+
+    if (countA === countB) {
+      // Compare indexes of coffeeOptions to keep the original order
+      return (
+        coffeeOptions.findIndex((c) => c.name === a.name) -
+        coffeeOptions.findIndex((c) => c.name === b.name)
+      );
+    }
+
+    return countB - countA;
+  });
+
+  return sorted;
 }
 
 export function timeSinceConsumption(utcMilliseconds) {
