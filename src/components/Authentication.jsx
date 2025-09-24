@@ -8,8 +8,11 @@ const Authentication = (props) => {
   const [password, setPassword] = useState('');
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [error, setError] = useState(null);
+  const [resetEmail, setResetEmail] = useState('');
+  const [resetMessage, setResetMessage] = useState('');
+  const [isResettingPassword, setIsResettingPassword] = useState(false);
 
-  const { signup, login } = useAuth();
+  const { signup, login, resetPassword } = useAuth();
 
   const handleAuthenticate = async () => {
     if (
@@ -41,6 +44,18 @@ const Authentication = (props) => {
     }
   };
 
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    try {
+      await resetPassword(resetEmail);
+      setResetMessage(
+        'Password reset email has been sent. Please check your inbox.'
+      );
+    } catch (error) {
+      setResetMessage(error.message);
+    }
+  };
+
   return (
     <>
       <h2 className="sign-up-text">{isRegistration ? 'Sign Up' : 'Login'}</h2>
@@ -63,15 +78,47 @@ const Authentication = (props) => {
         <p>{`${isAuthenticating ? 'Authenticating...' : 'Submit'}`}</p>
       </button>
       <hr />
-      <div className="register-content">
-        <p>
-          {isRegistration
-            ? 'Already have an account?'
-            : "Don't have an account?"}
-        </p>
-        <button onClick={() => setIsRegistration(!isRegistration)}>
-          <p>{isRegistration ? 'Sign in' : 'Sign Up'}</p>
-        </button>
+      <div className="register-container">
+        {!isResettingPassword ? (
+          <>
+            <div className="signin-signup">
+              <p>
+                {isRegistration
+                  ? 'Already have an account?'
+                  : "Don't have an account?"}
+              </p>
+              <button onClick={() => setIsRegistration(!isRegistration)}>
+                <p>{isRegistration ? 'Sign in' : 'Sign Up'}</p>
+              </button>
+            </div>
+            <div className="reset-password">
+              <p>{isRegistration ? '' : 'Forget your password?'}</p>
+              <button onClick={() => setIsResettingPassword(true)}>
+                <p>{isRegistration ? '' : 'Reset your Password'}</p>
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            {!resetMessage ? (
+              <form
+                onSubmit={handleResetPassword}
+                className="reset-password-form"
+              >
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  required
+                />
+                <button type="submit">Send Reset Link</button>
+              </form>
+            ) : (
+              <p className="reset-message">{resetMessage}</p>
+            )}
+          </>
+        )}
       </div>
     </>
   );

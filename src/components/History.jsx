@@ -35,7 +35,9 @@ const History = () => {
               ).toFixed(1);
               // const summary = `${coffee.name} | ${timeSinceConsumed} | $${coffee.cost} | ${remainingAmount}mg / ${originalAmount}mg`;
 
-              const summary = `${coffee.name}\n$${coffee.cost}\n${timeSinceConsumed}\n${remainingAmount} / ${originalAmount}mg`;
+              const summary = `${coffee.name}\n$${coffee.cost.toFixed(
+                2
+              )}\n${timeSinceConsumed}\n${remainingAmount} / ${originalAmount}mg`;
 
               return (
                 // <div title={summary} key={coffeeIndex}>
