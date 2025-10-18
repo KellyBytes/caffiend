@@ -160,7 +160,7 @@ h2 {
 }
 
 .coffee-button-selected {
-  border-color: var(--border-highlight) !important;
+  border: 2px solid var(--border-highlight) !important;
 }
 
 .coffee-cost {

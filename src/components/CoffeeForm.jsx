@@ -137,8 +137,27 @@ const CoffeeForm = (props) => {
         type="number"
         className="w-full coffee-cost"
         value={coffeeCost}
-        onChange={(e) => setCoffeeCost(e.target.value)}
+        onChange={(e) => {
+          const value = e.target.value;
+          if (/^\d{0,6}(\.\d{0,2})?$/.test(value) || value === '') {
+            setCoffeeCost(value);
+          }
+        }}
+        onKeyDown={(e) => {
+          if (['e', 'E', '+', '-'].includes(e.key)) {
+            e.preventDefault();
+          }
+        }}
+        onInput={(e) => {
+          e.target.value = e.target.value.replace(/[eE\+\-]/g, '');
+        }}
+        onBlur={() => {
+          setCoffeeCost(parseFloat(coffeeCost).toFixed(2));
+        }}
         placeholder="e.g. 4.50"
+        step="0.01"
+        inputMode="decimal"
+        pattern="^\d+(\.\d{0,2})?$"
       />
       <h4>Time since consumption</h4>
       <div className="time-entry">

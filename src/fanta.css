@@ -623,9 +623,6 @@ details[open] summary {
 
 .button-card {
   border: 1px solid var(--border-secondary);
-}
-
-.button-card {
   box-shadow: none;
 }
 
