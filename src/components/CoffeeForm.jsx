@@ -134,7 +134,7 @@ const CoffeeForm = (props) => {
       )}
       <h4>Add the cost ($)</h4>
       <input
-        type="number"
+        type="text"
         className="w-full coffee-cost"
         value={coffeeCost}
         onChange={(e) => {
