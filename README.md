@@ -1,14 +1,10 @@
 # ReactJS Caffeine Tracking App
 
-Originally created by [jamezmca](https://github.com/jamezmca)
-
----
-
-## Overview
+## 💡 Overview
 
 This is a web application that help you track your caffeine consumption.
 
-### Features
+## 🚀 Key Features
 
 - Record types, costs, and time when you take drink containing caffeine
 - Show stats including caffeine level, average daily caffeine, average number of coffees, average daily cost, and total cost
@@ -22,15 +18,19 @@ This is a web application that help you track your caffeine consumption.
 - **[New]** Show history by hovering or clicking
 - **[New]** Add Reset Password functionality
 
-### Built With
+## 🛠 Tech Stack
 
 - ReactJS
 - FantaCSS
 - Firebase
 
+### ▶ Live Demo
+
+🔗 https://caffiend.kellybytes.dev
+
 ---
 
-## Screenshots
+### Screenshots
 
 **Desktop**
 
@@ -70,3 +70,7 @@ Dark Mode
 
   </p>
 <br />
+
+---
+
+This project is based on a code-along tutorial by [jamezmca](https://github.com/jamezmca). I would like to thank him for his guidance and inspiration. All modifications and additional features were implemented by me.
